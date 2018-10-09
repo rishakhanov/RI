@@ -1,4 +1,4 @@
-package ru.job4j.calculator;
+﻿package ru.job4j.calculator;
 
 /**
  * Программа расчета идеального веса.
@@ -11,7 +11,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double manWeight(double height) {
-        double weight = (height-100)*1,15;
+        double weight = (height-100)*1.15;
 		return weight;
     }
 
@@ -21,7 +21,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double womanWeight(double height) {
-        double weight = (height-110)*1,15;
+        double weight = (height-110)*1.15;
 		return weight;
     }
 }
