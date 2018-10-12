@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  
 public class PaintTest {
 	@Test
-	public void whenPyramid4(){
+	public void whenPyramid4() {
 	Paint paint = new Paint();
 	String rst = paint.pyramid(4);
 	System.out.println(rst);
@@ -30,7 +30,7 @@ public class PaintTest {
 	}
 	
 	@Test
-	public void whenPyramid3(){
+	public void whenPyramid3() {
 	Paint paint = new Paint();
 	String rst = paint.pyramid(3);
 	System.out.println(rst);

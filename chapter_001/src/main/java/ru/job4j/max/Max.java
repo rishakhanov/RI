@@ -12,11 +12,11 @@ public class Max {
 	 * @param first,second Числа
 	 * @return Максимум
 	 */
-	public int max(int first, int second){
+	public int max(int first, int second) {
 		return first > second ? first : second;
 	}
 	
-	public int max(int first, int second, int third){
-		return this.max(max(first,second),third);
+	public int max(int first, int second, int third) {
+		return this.max(max(first,second), third);
 	}	
 }	

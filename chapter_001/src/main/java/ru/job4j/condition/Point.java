@@ -6,13 +6,13 @@ package ru.job4j.condition;
  * @since 0.1
  */
 
-public class Point{
+public class Point {
 	private int x;
 	private int y;
 	
-	public Point(int x, int y){
-		this.x=x;
-		this.y=y;
+	public Point(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}	
 
 	public double distanceTo(Point that) {

@@ -12,10 +12,12 @@ public class Counter {
 	 * @param start,finish Числа
 	 * @return Сумма чётных чисел
 	 */
-	public int add(int start, int finish){
-		int sum=0;
-		for (int i=start; i<=finish;i++) {
-			if ((i%2)==0) sum = sum+i;
+	public int add(int start, int finish) {
+		int sum = 0;
+		for (int i  =start; i <= finish; i++) {
+			if ((i%2)==0) {
+				sum = sum + i;
+			}
 		}
 		return sum;	
 	}

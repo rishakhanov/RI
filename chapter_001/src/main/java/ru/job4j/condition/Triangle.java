@@ -11,7 +11,7 @@ public class Triangle {
 	private Point b;
 	private Point c;
 	
-	public Triangle(Point a, Point b, Point c){
+	public Triangle(Point a, Point b, Point c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
@@ -29,8 +29,8 @@ public class Triangle {
 	* @param bc расстояние между точками b c
 	* @return Периметр.
 	*/
-	public double period(double ab, double ac, double bc){
-		return (ab+ac+bc)/2;
+	public double period(double ab, double ac, double bc) {
+		return (ab + ac + bc) / 2;
 	}
 
 	/**
@@ -38,14 +38,14 @@ public class Triangle {
 	*
 	* @return Вернуть прощадь, если треугольник существует или -1, если треугольника нет.
 	*/
-	public double area(){
+	public double area() {
 		double rsl = -1;
 		double ab = this.a.distanceTo(this.b);
 		double ac = this.a.distanceTo(this.c);
 		double bc = this.b.distanceTo(this.c);
 		double p = this.period(ab, ac, bc);
-		if (this.exist(ab, ac, bc)){
-			rsl = Math.sqrt(p*(p-ab)*(p-ac)*(p-bc));
+		if (this.exist(ab, ac, bc)) {
+			rsl = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
 		}
 		return rsl;
 	}	
@@ -60,8 +60,8 @@ public class Triangle {
 	* @param bc Длина от точки b c.
 	* @return Ответ;
 	*/
-	private boolean exist(double ab, double ac, double bc){
-		return (ab<(ac+bc)&ac<(ab+bc)&bc<(ab+ac));
+	private boolean exist(double ab, double ac, double bc) {
+		return (ab < (ac + bc) & ac < (ab + bc) & bc < (ab + ac));
 	}
  
 }

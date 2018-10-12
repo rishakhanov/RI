@@ -12,11 +12,13 @@ public class Factorial {
 	 * @param start,finish Числа
 	 * @return Сумма чётных чисел
 	 */
-	public int calc(int n){
-		int sum=1;
-		if (n==0) sum = 1;
+	public int calc(int n) {
+		int sum = 1;
+		if (n == 0) {
+			sum = 1;
+		}
 		else {
-			for (int i=1; i<=n;i++) sum=sum*i; 
+			for (int i = 1; i <= n; i++) sum = sum * i;
 		}		
 		return sum;	
 	}

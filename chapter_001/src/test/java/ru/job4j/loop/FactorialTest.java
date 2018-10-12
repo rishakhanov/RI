@@ -12,14 +12,14 @@ import static org.junit.Assert.assertThat;
  
 public class FactorialTest {
 	@Test
-	public void whenCalculateFactorialForFiveThenOneHundreedTwenty(){
+	public void whenCalculateFactorialForFiveThenOneHundreedTwenty() {
 	Factorial factorial = new Factorial();
 	int result = factorial.calc(5);
 	assertThat(result, is(120));
 	}
 
 	@Test
-	public void whenCalculateFactorialForZeroThenOne(){
+	public void whenCalculateFactorialForZeroThenOne() {
 	Factorial factorial = new Factorial();
 	int result = factorial.calc(0);
 	assertThat(result, is(1));

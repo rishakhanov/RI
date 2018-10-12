@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
  
 public class BoardTest {
 	@Test
-	public void whenPaintBoardWithWidthThreeAndHeightThreeThenStringWithThreeColsAndThreeRows(){
+	public void whenPaintBoardWithWidthThreeAndHeightThreeThenStringWithThreeColsAndThreeRows() {
 	Board board = new Board();
 	String result = board.paint(3, 3);
 	final String line = System.getProperty("line.separator");
@@ -21,7 +21,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void whenPaintBoardWithWidthFiveAndHeightFourThenStringWithFiveColsAndFourRows(){
+	public void whenPaintBoardWithWidthFiveAndHeightFourThenStringWithFiveColsAndFourRows() {
 	Board board = new Board();
 	String result = board.paint(5, 4);
 	final String line = System.getProperty("line.separator");

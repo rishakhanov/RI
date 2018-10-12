@@ -12,12 +12,12 @@ public class Board {
 	 * @param height,weight Числа
 	 * @return Шахматная доска
 	 */
-	public String paint(int weight, int height){
+	public String paint(int weight, int height) {
 		StringBuilder screen = new StringBuilder();
 		String ln = System.lineSeparator();
-		for (int ht = 1; ht <= height; ht++){
-			for (int wt = 1; wt <= weight;wt++) {
-				if ((ht+wt) %2==0) {
+		for (int ht = 1; ht <= height; ht++) {
+			for (int wt = 1; wt <= weight; wt++) {
+				if ((ht + wt) % 2 == 0) {
 					screen.append("X");
 				} else {
 					screen.append(" ");	

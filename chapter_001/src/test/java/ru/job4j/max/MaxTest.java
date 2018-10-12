@@ -12,9 +12,9 @@ import static org.junit.Assert.assertThat;
  
 public class MaxTest {
 	@Test
-	public void whenFirstAndSecond(){
+	public void whenFirstAndSecond() {
 	Max maxim = new Max();
-	int result = maxim.max(1,2);
+	int result = maxim.max(1, 2);
 	assertThat(result, is(2));
 	}	
 }	

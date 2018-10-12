@@ -15,7 +15,7 @@ public class Paint {
 	 * @return Шахматная доска
 	 */
 
-	public String pyramid(int height){
+	public String pyramid(int height) {
 			return this.loopBy(
 				height,
 				2 * height - 1,
@@ -23,9 +23,9 @@ public class Paint {
 			);		
 	}
 
-	 private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict){
+	 private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
 		StringBuilder screen = new StringBuilder();
-		for (int row = 0; row != height; row++){
+		for (int row = 0; row != height; row++) {
 			for (int column = 0; column != weight; column++) {
 				if (predict.test(row, column)) {
 					screen.append("^");
