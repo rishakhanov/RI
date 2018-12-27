@@ -71,44 +71,30 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
-        int count_1 = 1;
-        int count_2 = 1;
+        int count1 = 1;
+        int count2 = 1;
         for (int row = 0; row != table.length; row++) {
             for (int cell = 1; cell != table.length; cell++) {
-                if (table[row][cell] == table[row][cell - 1]) {
-                    count_1 = count_1 + 1;
+                if ((table[row][cell] == table[row][cell - 1]) && (table[row][cell] == 1)) {
+                    count1 = count1 + 1;
                 }
             }
-            count_1 = 1;
         }
         for (int cell = 0; cell != table.length; cell++) {
             for (int row = 1; row != table.length; row++) {
-                if (table[row][cell] == table[row - 1][cell]) {
-                    count_2 = count_2 + 1;
+                if ((table[row][cell] == table[row - 1][cell]) && (table[row][cell] == 1)) {
+                    count2 = count2 + 1;
                 }
             }
-            count_2 = 1;
         }
 
-        if ((count_1 == size)||(count_2 == size)) {
+        if ((count1 == size) || (count2 == size)) {
             result = true;
         }
-
-        System.out.println("count_1 = " + count_1);
-        System.out.println("count_2 = " + count_2);
-        System.out.println("size = " + size);
-
-        for (int row = 0; row != table.length; row++) {
-            for (int cell = 0; cell != table.length; cell++) {
-                System.out.print(table[row][cell]);
-            }
-            System.out.println();
-        }
-
         return result;
     }
 
-    private int[][] convert() {
+    public int[][] convert() {
         int[][] table = new int[this.size][this.size];
         for (int row = 0; row != table.length; row++) {
             for (int cell = 0; cell != table.length; cell++) {
