@@ -63,6 +63,7 @@ public class Tracker {
         for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = itemnew;
+                this.items[i].setId(id);
                 result = true;
             }
         }
@@ -85,11 +86,13 @@ public class Tracker {
         return result;
     }
 
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> result = new ArrayList<Item>();
+    public Item[] findByName(String key) {
+        Item[] result = new Item[this.position];
+        int pos = 0;
         for (Item item : this.items) {
             if (item != null && item.getName().equals(key)) {
-                result.add(item);
+                result[pos] = item;
+                pos++;
             }
         }
         return result;
