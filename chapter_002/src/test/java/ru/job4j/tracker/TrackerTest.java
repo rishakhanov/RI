@@ -53,7 +53,7 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         tracker.add(item4);
-        Item[] item = new Item[4];
+        Item[] item = new Item[2];
         item[0] = item2;
         item[1] = item4;
         assertThat(tracker.findByName("test2"), is(item));

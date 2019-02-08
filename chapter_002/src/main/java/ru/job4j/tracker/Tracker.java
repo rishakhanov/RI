@@ -7,6 +7,7 @@ package ru.job4j.tracker;
 
 import java.util.*;
 
+
 public class Tracker {
     /**
      * Массив для хранения заявок.
@@ -51,11 +52,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     public boolean replace(String id, Item itemnew) {
@@ -65,6 +62,7 @@ public class Tracker {
                 this.items[i] = itemnew;
                 this.items[i].setId(id);
                 result = true;
+                break;
             }
         }
         return result;
@@ -73,28 +71,27 @@ public class Tracker {
 
     public boolean delete(String id) {
         boolean result = false;
-        int point = 0;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+        for (int point = 0; point < this.items.length; point++) {
+            if (this.items[point] != null && this.items[point].getId().equals(id)) {
                 System.arraycopy(this.items, point + 1, this.items, point, this.items.length - point - 1);
                 result = true;
                 this.position--;
                 break;
             }
-            point++;
         }
         return result;
     }
 
     public Item[] findByName(String key) {
         Item[] result = new Item[this.position];
-        int pos = 0;
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(key)) {
-                result[pos] = item;
-                pos++;
+        int point = 0;
+        for (int pos = 0; pos < this.items.length; pos++) {
+        //for (Item item : this.items) {
+            if (this.items[pos] != null && this.items[pos].getName().equals(key)) {
+                result[point] = this.items[pos];
+                point++;
             }
         }
-        return result;
+        return Arrays.copyOf(result, point);
     }
 }
