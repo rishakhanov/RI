@@ -53,9 +53,11 @@ public class StartUI {
         String name = this.input.ask("Введите имя заявки : ");
         String desc = this.input.ask("Введите описание заявки : ");
         Item item = new Item(name, desc);
-        boolean result = this.tracker.replace(id, item);
-        System.out.println(result);
-
+        if (this.tracker.replace(id, item)) {
+            System.out.println("Item was updated");
+        } else {
+            System.out.println("Item not found");
+        }
     }
 
     private void findItem() {
@@ -68,8 +70,11 @@ public class StartUI {
     private void deleteItem() {
         System.out.println("----------------Удаление заявки по id------------");
         String id = this.input.ask("Введите id заявки : ");
-        boolean result = this.tracker.delete(id);
-        System.out.println(result);
+        if (this.tracker.delete(id)) {
+            System.out.println("Item was deleted");
+        } else {
+            System.out.println("Item not found");
+        }
     }
 
     private void getItem() {
