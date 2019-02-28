@@ -81,7 +81,8 @@ public class StartUI {
         System.out.println("----------------Вывод всех заявок------------");
         Item[] arrays = this.tracker.findAll();
         for (Item item : arrays) {
-            System.out.println("Заявка с id : " + item.getId() + " и с именем " + item.getName());
+            //System.out.println("Заявка с id : " + item.getId() + " и с именем " + item.getName());
+            System.out.println(item.getName() + " " + item.getDescription());
         }
     }
 
