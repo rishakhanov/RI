@@ -13,6 +13,11 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    public static final String MENU = "Меню." + System.lineSeparator() + "0 : Добавление заявки"
+                                        + System.lineSeparator() +  "1 : Обновление заявки" + System.lineSeparator()
+                                        + "2 : Поиск заявки" +  System.lineSeparator() + "3 : Удаление заявки"
+                                        + System.lineSeparator() + "4 : Вывести все заявки" + System.lineSeparator()
+                                        + "5 : Выход" + System.lineSeparator();
 
     @Before
     public void loadOutput() {
@@ -38,20 +43,7 @@ public class StartUITest {
                 this.out.toString(),
                 is(
                         new StringBuilder()
-                                .append("Меню.")
-                                .append(System.lineSeparator())
-                                .append("0 : Добавление заявки")
-                                .append(System.lineSeparator())
-                                .append("1 : Обновление заявки")
-                                .append(System.lineSeparator())
-                                .append("2 : Поиск заявки")
-                                .append(System.lineSeparator())
-                                .append("3 : Удаление заявки")
-                                .append(System.lineSeparator())
-                                .append("4 : Вывести все заявки")
-                                .append(System.lineSeparator())
-                                .append("5 : Выход")
-                                .append(System.lineSeparator())
+                                .append(MENU)
                                 .append("----------------Вывод всех заявок------------")
                                 .append(System.lineSeparator())
                                 .append("name1" + " " + "desc1")
@@ -60,24 +52,57 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("name3" + " " + "desc3")
                                 .append(System.lineSeparator())
-                                .append("Меню.")
-                                .append(System.lineSeparator())
-                                .append("0 : Добавление заявки")
-                                .append(System.lineSeparator())
-                                .append("1 : Обновление заявки")
-                                .append(System.lineSeparator())
-                                .append("2 : Поиск заявки")
-                                .append(System.lineSeparator())
-                                .append("3 : Удаление заявки")
-                                .append(System.lineSeparator())
-                                .append("4 : Вывести все заявки")
-                                .append(System.lineSeparator())
-                                .append("5 : Выход")
-                                .append(System.lineSeparator())
+                                .append(MENU)
                                 .toString()
                 )
         );
     }
+
+    @Test
+    public void whenFindItemThenTrackerReturnFoundValue2() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("name1", "desc1"));
+        Item item2 = tracker.add(new Item("name2", "desc2"));
+        Item item3 = tracker.add(new Item("name3", "desc3"));
+        Input input = new StubInput(new String[]{"2", item2.getId(), "5"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(MENU)
+                                .append("----------------Поиск заявки по id------------")
+                                .append(System.lineSeparator())
+                                .append("Заявка с id : " + item2.getId() + " и с именем : " + item2.getName())
+                                .append(System.lineSeparator())
+                                .append(MENU)
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenUserAddItemThenTrackerHasNewItemWithSameName2() {
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "5"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(MENU)
+                                .append("---------------Добавление новой заявки----------------")
+                                .append(System.lineSeparator())
+                                .append("-----------Новая заявка с getId : " + tracker.findAll()[0].getId() + "-----------")
+                                .append(System.lineSeparator())
+                                .append(MENU)
+                                .toString()
+                )
+        );
+    }
+
+
+
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
