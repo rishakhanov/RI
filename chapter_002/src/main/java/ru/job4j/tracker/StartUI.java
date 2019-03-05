@@ -18,7 +18,7 @@ public class StartUI {
     }
 
     public void init() {
-        boolean exit = false;
+    /*    boolean exit = false;
         while (!exit) {
             this.showMenu();
             String answer = this.input.ask("Введите пункт меню : ");
@@ -36,6 +36,13 @@ public class StartUI {
                 exit = true;
             }
         }
+      */
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillActions();
+        do {
+            menu.show();
+            menu.select(Integer.valueOf(input.ask("select:")));
+        } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
     private void createItem() {
