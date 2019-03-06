@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StartUI {
     private static final String ADD = "0";
@@ -11,6 +13,7 @@ public class StartUI {
     private static final String EXIT = "5";
     private final Input input;
     private final Tracker tracker;
+    private int[] ranges = new int[]{0, 1, 2, 3, 4};
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -18,30 +21,15 @@ public class StartUI {
     }
 
     public void init() {
-    /*    boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (UPDATE.equals(answer)) {
-                this.updateItem();
-            } else if (FIND.equals(answer)) {
-                this.findItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (GET.equals(answer)) {
-                this.getItem();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-            }
-        }
-      */
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> range = new ArrayList<>();
         menu.fillActions();
+        for (int i = 0; i < menu.getActionsLength(); i++) {
+            range.add(i);
+        }
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.ask("select:")));
+            menu.select(input.ask("select:", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
@@ -104,6 +92,6 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
