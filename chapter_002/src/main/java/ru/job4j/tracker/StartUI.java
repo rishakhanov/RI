@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StartUI {
-    private static final String ADD = "0";
+    /*private static final String ADD = "0";
     private static final String UPDATE = "1";
     private static final String FIND = "2";
     private static final String DELETE = "3";
     private static final String GET = "4";
-    private static final String EXIT = "5";
+    private static final String EXIT = "5";*/
     private final Input input;
     private final Tracker tracker;
     private int[] ranges = new int[]{0, 1, 2, 3, 4};
@@ -22,18 +22,18 @@ public class StartUI {
 
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        List<Integer> range = new ArrayList<>();
+       /* List<Integer> range = new ArrayList<>();*/
         menu.fillActions();
-        for (int i = 0; i < menu.getActionsLength(); i++) {
+        /*for (int i = 0; i < menu.getActionsLength(); i++) {
             range.add(i);
-        }
+        }*/
         do {
             menu.show();
             menu.select(input.ask("select:", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
-    private void createItem() {
+   /* private void createItem() {
         System.out.println("---------------Добавление новой заявки----------------");
         String name = this.input.ask("Введите имя заявки : ");
         String desc = this.input.ask("Введите описание заявки : ");
@@ -91,6 +91,7 @@ public class StartUI {
         System.out.println("5 : Выход");
     }
 
+*/
     public static void main(String[] args) {
         new StartUI(new ValidateInput(), new Tracker()).init();
     }
