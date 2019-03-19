@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
-public class FindItem implements UserAction {
-    @Override
-    public int key() {
-        return 2;
+public class FindItem extends BaseAction {
+
+    public FindItem() {
+        super(2, "Поиск заявки");
     }
 
     @Override
@@ -14,10 +14,5 @@ public class FindItem implements UserAction {
         if (result != null) {
             System.out.println("Заявка с id : " + result.getId() + " и с именем : " + result.getName());
         }
-    }
-
-    @Override
-    public String info() {
-        return "2 : Поиск заявки";
     }
 }

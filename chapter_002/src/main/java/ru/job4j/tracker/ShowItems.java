@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
-public class ShowItems implements UserAction {
-    @Override
-    public int key() {
-        return 4;
+public class ShowItems extends BaseAction {
+
+    public ShowItems() {
+        super(4, "Вывести все заявки");
     }
 
     @Override
@@ -13,10 +13,5 @@ public class ShowItems implements UserAction {
         for (Item item : arrays) {
             System.out.println(item.getName() + " " + item.getDescription());
         }
-    }
-
-    @Override
-    public String info() {
-        return "4 : Вывести все заявки";
     }
 }

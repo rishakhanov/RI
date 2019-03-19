@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
-public class UpdateItem implements UserAction {
-    @Override
-    public int key() {
-        return 1;
+public class UpdateItem extends BaseAction {
+
+    public UpdateItem() {
+        super(1, "Обновление заявки");
     }
 
     @Override
@@ -18,10 +18,5 @@ public class UpdateItem implements UserAction {
         } else {
             System.out.println("Item not found");
         }
-    }
-
-    @Override
-    public String info() {
-        return "1 : Обновление заявки";
     }
 }
