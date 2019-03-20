@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class AddItem extends BaseAction {
 
-    public AddItem() {
-        super(0, "Добавление заявки");
+    public AddItem(int key, String name) {
+        super(key, name);
     }
 
     @Override

@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class UpdateItem extends BaseAction {
 
-    public UpdateItem() {
-        super(1, "Обновление заявки");
+    public UpdateItem(int key, String name) {
+        super(key, name);
     }
 
     @Override

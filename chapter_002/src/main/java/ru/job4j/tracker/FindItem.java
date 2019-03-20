@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class FindItem extends BaseAction {
 
-    public FindItem() {
-        super(2, "Поиск заявки");
+    public FindItem(int key, String name) {
+        super(key, name);
     }
 
     @Override

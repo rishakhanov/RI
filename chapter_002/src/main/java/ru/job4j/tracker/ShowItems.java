@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 public class ShowItems extends BaseAction {
 
-    public ShowItems() {
+    public ShowItems(int key, String name) {
         super(4, "Вывести все заявки");
     }
 

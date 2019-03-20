@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class DeleteItem extends BaseAction {
 
-    public DeleteItem() {
-        super(3, "Удаление заявки");
+    public DeleteItem(int key, String name) {
+        super(key, name);
     }
 
     @Override

@@ -18,11 +18,11 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions.add(new AddItem());
-        this.actions.add(new UpdateItem());
-        this.actions.add(new FindItem());
-        this.actions.add(new DeleteItem());
-        this.actions.add(new ShowItems());
+        this.actions.add(new AddItem(0, "Добавление заявки"));
+        this.actions.add(new UpdateItem(1, "Обновление заявки"));
+        this.actions.add(new FindItem(2, "Поиск заявки"));
+        this.actions.add(new DeleteItem(3, "Удаление заявки"));
+        this.actions.add(new ShowItems(4, "Вывести все заявки"));
     }
 
     public void select(int key) {
