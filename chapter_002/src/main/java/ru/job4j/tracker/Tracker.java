@@ -94,4 +94,16 @@ public class Tracker {
         }
         return Arrays.copyOf(result, point);
     }
+
+    /*public Item findByName(String name) {
+        Item result = null;
+        for (Item item : this.items) {
+            if (item != null && item.getName().equals(name)) {
+                result = item;
+                break;
+            }
+        }
+        return result;
+    }*/
+
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class StartUI {
     private final Input input;
     private final Tracker tracker;
-    private int[] ranges = new int[]{0, 1, 2, 3, 4};
+    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;

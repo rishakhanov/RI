@@ -23,6 +23,7 @@ public class MenuTracker {
         this.actions.add(new FindItem(2, "Поиск заявки"));
         this.actions.add(new DeleteItem(3, "Удаление заявки"));
         this.actions.add(new ShowItems(4, "Вывести все заявки"));
+        this.actions.add(new FindItemName(5,"Поиск заявки по имени"));
     }
 
     public void select(int key) {

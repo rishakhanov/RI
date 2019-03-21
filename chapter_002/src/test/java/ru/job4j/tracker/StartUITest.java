@@ -16,7 +16,8 @@ public class StartUITest {
     public static final String MENU = "0 : Добавление заявки"
                                         + System.lineSeparator() +  "1 : Обновление заявки" + System.lineSeparator()
                                         + "2 : Поиск заявки" +  System.lineSeparator() + "3 : Удаление заявки"
-                                        + System.lineSeparator() + "4 : Вывести все заявки" + System.lineSeparator();
+                                        + System.lineSeparator() + "4 : Вывести все заявки" + System.lineSeparator()
+                                        + "5 : Поиск заявки по имени" + System.lineSeparator();
 
 
     @Before
