@@ -11,7 +11,7 @@ public class FindItemName extends BaseAction {
         System.out.println("----------------Поиск заявки по имени------------");
         String name = input.ask("Введите имя заявки : ");
         Item[] result = tracker.findByName(name);
-        if (result != null) {
+        if (result.length > 0) {
             for (Item item : result) {
                 System.out.println("Заявка с id : " + item.getId() + " и с именем : " + item.getName());
             }

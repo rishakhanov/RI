@@ -8,6 +8,7 @@ public class MenuTracker {
     private Tracker tracker;
     private List<UserAction> actions = new ArrayList<>();
 
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
@@ -23,7 +24,7 @@ public class MenuTracker {
         this.actions.add(new FindItem(2, "Поиск заявки"));
         this.actions.add(new DeleteItem(3, "Удаление заявки"));
         this.actions.add(new ShowItems(4, "Вывести все заявки"));
-        this.actions.add(new FindItemName(5,"Поиск заявки по имени"));
+        this.actions.add(new FindItemName(5, "Поиск заявки по имени"));
     }
 
     public void select(int key) {
@@ -36,6 +37,14 @@ public class MenuTracker {
                 System.out.println(action.info());
             }
         }
+    }
+
+    public int[] fillRanges() {
+        int[] ranges = new int[getActionsLength()];
+        for (int i = 0; i < getActionsLength(); i++) {
+            ranges [i] = i;
+        }
+        return ranges;
     }
 
 }

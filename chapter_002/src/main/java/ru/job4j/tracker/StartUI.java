@@ -7,7 +7,6 @@ import java.util.List;
 public class StartUI {
     private final Input input;
     private final Tracker tracker;
-    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -19,7 +18,7 @@ public class StartUI {
         menu.fillActions();
         do {
             menu.show();
-            menu.select(input.ask("select:", ranges));
+            menu.select(input.ask("select:", menu.fillRanges()));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 

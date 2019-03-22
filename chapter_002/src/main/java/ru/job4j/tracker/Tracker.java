@@ -86,7 +86,6 @@ public class Tracker {
         Item[] result = new Item[this.position];
         int point = 0;
         for (int pos = 0; pos < this.items.length; pos++) {
-        //for (Item item : this.items) {
             if (this.items[pos] != null && this.items[pos].getName().equals(key)) {
                 result[point] = this.items[pos];
                 point++;
@@ -94,16 +93,4 @@ public class Tracker {
         }
         return Arrays.copyOf(result, point);
     }
-
-    /*public Item findByName(String name) {
-        Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(name)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
-    }*/
-
 }
