@@ -25,22 +25,15 @@ public class Logic {
         int index = this.findBy(source);
         if (index == -1) {
             throw new FigureNotFoundException("Figure Not Found.");
-        } else {
-            Cell[] steps = this.figures[index].way(source, dest);
-            for (int i = 0; i < steps.length; i++) {
-                if (this.findBy(steps[i]) != -1) {
-                    throw new OccupiedWayException("Occupied way.");
-                } else {
-                    rst = true;
-                    //this.figures[index] = this.figures[index].copy(dest);
-                }
-            }
-            this.figures[index] = this.figures[index].copy(dest);
-            //if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-            //    rst = true;
-            //    this.figures[index] = this.figures[index].copy(dest);
-            //}
         }
+        Cell[] steps = this.figures[index].way(source, dest);
+        for (int i = 0; i < steps.length; i++) {
+            if (this.findBy(steps[i]) != -1) {
+                throw new OccupiedWayException("Occupied way.");
+            }
+        }
+        rst = true;
+        this.figures[index] = this.figures[index].copy(dest);
         return rst;
     }
 
@@ -61,9 +54,4 @@ public class Logic {
         }
         return rst;
     }
-
-    //private boolean checkWay(int index) {
-    //    boolean check = false;
-    //
-    //}
 }

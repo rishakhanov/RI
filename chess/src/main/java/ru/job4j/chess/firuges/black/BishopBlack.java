@@ -27,13 +27,18 @@ public class BishopBlack implements Figure {
         Cell[] steps = new Cell[Math.abs(source.y - dest.y)];
         if (((source.y - dest.y) == 0) || ((source.x - dest.x) == 0)) {
             throw new ImpossibleMoveException("Impossible Move");
-        } else {
+        }
+        for (int i = 0; i < steps.length; i++) {
+            steps[i] = Cell.values()[8 * source.x + source.y + (dest.x - source.x) / steps.length * (i + 1) * 8
+                    + (dest.y - source.y) / steps.length * (i + 1)];
+        }
+        /*else {
             for (int i = 0; i < steps.length; i++) {
                 steps[i] = Cell.values()[8 * source.x + source.y + (dest.x - source.x) / steps.length * (i + 1) * 8
                         + (dest.y - source.y) / steps.length * (i + 1)];
             }
 
-        }
+        }*/
         return steps;
     }
 
