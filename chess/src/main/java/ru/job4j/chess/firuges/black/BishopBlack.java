@@ -32,13 +32,6 @@ public class BishopBlack implements Figure {
             steps[i] = Cell.values()[8 * source.x + source.y + (dest.x - source.x) / steps.length * (i + 1) * 8
                     + (dest.y - source.y) / steps.length * (i + 1)];
         }
-        /*else {
-            for (int i = 0; i < steps.length; i++) {
-                steps[i] = Cell.values()[8 * source.x + source.y + (dest.x - source.x) / steps.length * (i + 1) * 8
-                        + (dest.y - source.y) / steps.length * (i + 1)];
-            }
-
-        }*/
         return steps;
     }
 

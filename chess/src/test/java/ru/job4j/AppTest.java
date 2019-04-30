@@ -3,6 +3,9 @@ package ru.job4j;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import ru.job4j.chess.Logic;
+import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.black.BishopBlack;
 
 /**
  * Unit test for simple App.
@@ -29,6 +32,9 @@ public class AppTest
      * Rigourous Test :-)
      */
     public void testApp() {
-        assertTrue(true);
+        BishopBlack bishopBlack1 = new BishopBlack(Cell.F8);
+        Logic logic = new Logic();
+        logic.add(bishopBlack1);
+        assertTrue("example", logic.move(Cell.F8, Cell.H6));
     }
 }
