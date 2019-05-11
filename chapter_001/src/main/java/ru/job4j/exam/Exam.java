@@ -5,18 +5,26 @@ public class Exam {
     public static void main(String[] args) {
         int[] x = {1, 3, 2, 6, 0, 7};
         int[] y = {9, 8, 1, 12, 23};
-        int[] z = new int[11];
+        printAll(merge(x, y));
+    }
+
+    public static int[] merge(int[] left, int[] right) {
         int control = 0;
-
-
-        for (int i = 0; i < 11; i++) {
-            if (control <= 5) {
-                z[i] = x[i];
+        int[] z = new int[left.length + right.length];
+        for (int i = 0; i < (left.length + right.length); i++) {
+            if (control <= (left.length - 1)) {
+                z[i] = left[i];
             } else {
-                z[i] = y[i - x.length];
+                z[i] = right[i - left.length];
             }
             control++;
-            System.out.println(z[i]);
+        }
+        return z;
+    }
+
+    public static void printAll(int[] print) {
+        for (int x : print) {
+            System.out.println(x);
         }
     }
 }
