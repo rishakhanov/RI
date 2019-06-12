@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class ShowItems extends BaseAction {
 
     public ShowItems(int key, String name) {
@@ -9,7 +11,7 @@ public class ShowItems extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("----------------Вывод всех заявок------------");
-        Item[] arrays = tracker.findAll();
+        List<Item> arrays = tracker.findAll();
         for (Item item : arrays) {
             System.out.println(item.getName() + " " + item.getDescription());
         }

@@ -12,7 +12,7 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public int ask(String input, int[] range) {
+    public int ask(String input, List<Integer> range) {
         int key = Integer.valueOf(this.ask(input));
         boolean exist = false;
         for (int value : range) {

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class StubInput implements Input {
     private final String[] value;
     private int position;
@@ -15,7 +17,7 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int ask(String input, int[] range) {
+    public int ask(String input, List<Integer> range) {
         int key = Integer.valueOf(this.ask(input));
         boolean exist = false;
         for (int value : range) {

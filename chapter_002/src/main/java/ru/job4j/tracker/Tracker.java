@@ -12,8 +12,7 @@ public class Tracker {
     /**
      * Массив для хранения заявок.
      */
-    private final Item[] items = new Item[100];
-
+    private final List<Item> items = new ArrayList<>();
     /**
      * Указатель ячейки для новой заявки.
      */
@@ -27,7 +26,8 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        //this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -51,19 +51,26 @@ public class Tracker {
         return result;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+        return items;
     }
 
     public boolean replace(String id, Item itemnew) {
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = itemnew;
-                this.items[i].setId(id);
+        int count = 0;
+        for (Item element : items) {
+            if (element.getId().equals(id)) {
                 result = true;
                 break;
             }
+            count++;
+        }
+        if (result) {
+            Item replace = new Item();
+            replace = itemnew;
+            replace.setId(id);
+            items.remove(count);
+            items.add(count, replace);
         }
         return result;
 
@@ -71,26 +78,28 @@ public class Tracker {
 
     public boolean delete(String id) {
         boolean result = false;
-        for (int point = 0; point < this.items.length; point++) {
-            if (this.items[point] != null && this.items[point].getId().equals(id)) {
-                System.arraycopy(this.items, point + 1, this.items, point, this.items.length - point - 1);
+        int count = 0;
+        for (Item element : this.items) {
+            if (element != null && element.getId().equals(id)) {
+
                 result = true;
-                this.position--;
                 break;
             }
+            count++;
+        }
+        if (result) {
+            items.remove(count);
         }
         return result;
     }
 
-    public Item[] findByName(String key) {
-        Item[] result = new Item[this.position];
-        int point = 0;
-        for (int pos = 0; pos < this.items.length; pos++) {
-            if (this.items[pos] != null && this.items[pos].getName().equals(key)) {
-                result[point] = this.items[pos];
-                point++;
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
+        for (Item element : this.items) {
+            if (element != null && element.getName().equals(key)) {
+                result.add(element);
             }
         }
-        return Arrays.copyOf(result, point);
+        return result;
     }
 }

@@ -94,7 +94,7 @@ public class StartUITest {
                                 .append(MENU)
                                 .append("---------------Добавление новой заявки----------------")
                                 .append(System.lineSeparator())
-                                .append("-----------Новая заявка с getId : " + tracker.findAll()[0].getId() + "-----------")
+                                .append("-----------Новая заявка с getId : " + tracker.findAll().get(0).getId() + "-----------")
                                 .append(System.lineSeparator())
                                 //.append(MENU)
                                 .toString()
@@ -110,7 +110,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class StartUITest {
         Item item3 = tracker.add(new Item("name3", "desc3"));
         Input input = new StubInput(new String[]{"3", item2.getId(), "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[1].getName(), is("name3"));
+        assertThat(tracker.findAll().get(1).getName(), is("name3"));
     }
 
     @Test

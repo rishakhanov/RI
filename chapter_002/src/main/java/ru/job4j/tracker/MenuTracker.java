@@ -39,10 +39,10 @@ public class MenuTracker {
         }
     }
 
-    public int[] fillRanges() {
-        int[] ranges = new int[getActionsLength()];
+    public List<Integer> fillRanges() {
+        List<Integer> ranges = new ArrayList<>();
         for (int i = 0; i < getActionsLength(); i++) {
-            ranges [i] = i;
+            ranges.add(i);
         }
         return ranges;
     }
