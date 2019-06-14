@@ -119,7 +119,8 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"1", item.getId(), "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
+        assertThat(tracker.findAll().get(0).getName(), is("test replace"));
+        //assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
 
     @Test
