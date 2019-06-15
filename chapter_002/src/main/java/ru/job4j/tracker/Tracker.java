@@ -26,7 +26,6 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        //this.items[this.position++] = item;
         this.items.add(item);
         return item;
     }
@@ -57,36 +56,24 @@ public class Tracker {
 
     public boolean replace(String id, Item itemnew) {
         boolean result = false;
-        int count = 0;
-
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(count).getId().equals(id)) {
+            if (items.get(i).getId().equals(id)) {
+                items.set(i, itemnew);
                 result = true;
                 break;
             }
-            count++;
-        }
-
-        if (result) {
-            items.set(count, itemnew);
         }
         return result;
-
     }
 
     public boolean delete(String id) {
         boolean result = false;
-        int count = 0;
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(count).getId().equals(id)) {
+            if (items.get(i).getId().equals(id)) {
+                items.remove(i);
                 result = true;
                 break;
             }
-            count++;
-        }
-
-        if (result) {
-            items.remove(count);
         }
         return result;
     }
