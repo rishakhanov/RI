@@ -18,11 +18,12 @@ public class Board {
 		for (int ht = 1; ht <= height; ht++) {
 			for (int wt = 1; wt <= weight; wt++) {
 				if ((ht + wt) % 2 == 0) {
-					screen.append("X");
+					screen.append("x");
 				} else {
 					screen.append(" ");	
 				}	
-			}		
+			}
+			screen.append(ln);
 		}		
 		return screen.toString();	
 	}
