@@ -13,7 +13,8 @@ public class ShowItems extends BaseAction {
         System.out.println("----------------Вывод всех заявок------------");
         List<Item> arrays = tracker.findAll();
         for (Item item : arrays) {
-            System.out.println(item.getName() + " " + item.getDescription());
+            //System.out.println(item.getName() + " " + item.getDescription());
+            output.accept(item.getName() + " " + item.getDescription());
         }
     }
 }

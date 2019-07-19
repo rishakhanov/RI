@@ -2,16 +2,19 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private List<UserAction> actions = new ArrayList<>();
+    private final Consumer<String> output;
 
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     public int getActionsLength() {
