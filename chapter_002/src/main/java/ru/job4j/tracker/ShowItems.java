@@ -1,8 +1,10 @@
 package ru.job4j.tracker;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ShowItems extends BaseAction {
+
 
     public ShowItems(int key, String name) {
         super(4, "Вывести все заявки");
@@ -13,8 +15,8 @@ public class ShowItems extends BaseAction {
         System.out.println("----------------Вывод всех заявок------------");
         List<Item> arrays = tracker.findAll();
         for (Item item : arrays) {
-            //System.out.println(item.getName() + " " + item.getDescription());
-            output.accept(item.getName() + " " + item.getDescription());
+            System.out.println(item.getName() + " " + item.getDescription());
+            //output.accept(item.getName() + " " + item.getDescription());
         }
     }
 }
