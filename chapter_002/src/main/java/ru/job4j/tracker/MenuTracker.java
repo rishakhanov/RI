@@ -22,12 +22,12 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions.add(new AddItem(0, "Добавление заявки"));
-        this.actions.add(new UpdateItem(1, "Обновление заявки"));
-        this.actions.add(new FindItem(2, "Поиск заявки"));
-        this.actions.add(new DeleteItem(3, "Удаление заявки"));
-        this.actions.add(new ShowItems(4, "Вывести все заявки"));
-        this.actions.add(new FindItemName(5, "Поиск заявки по имени"));
+        this.actions.add(new AddItem(0, "Добавление заявки", output));
+        this.actions.add(new UpdateItem(1, "Обновление заявки", output));
+        this.actions.add(new FindItem(2, "Поиск заявки", output));
+        this.actions.add(new DeleteItem(3, "Удаление заявки", output));
+        this.actions.add(new ShowItems(4, "Вывести все заявки", output));
+        this.actions.add(new FindItemName(5, "Поиск заявки по имени", output));
     }
 
     public void select(int key) {

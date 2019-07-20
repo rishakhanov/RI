@@ -1,9 +1,14 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public class DeleteItem extends BaseAction {
 
-    public DeleteItem(int key, String name) {
+    private Consumer<String> out;
+
+    public DeleteItem(int key, String name, Consumer<String> out) {
         super(key, name);
+        this.out = out;
     }
 
     @Override
@@ -11,9 +16,9 @@ public class DeleteItem extends BaseAction {
         System.out.println("----------------Удаление заявки по id------------");
         String id = input.ask("Введите id заявки : ");
         if (tracker.delete(id)) {
-            System.out.println("Item was deleted");
+            out.accept("Item was deleted");
         } else {
-            System.out.println("Item not found");
+            out.accept("Item not found");
         }
     }
 }

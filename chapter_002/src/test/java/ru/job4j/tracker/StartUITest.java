@@ -13,6 +13,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+
     private final Consumer<String> output = new Consumer<String>() {
         private final PrintStream stdout = new PrintStream(out);
         @Override
@@ -20,7 +21,7 @@ public class StartUITest {
             stdout.println(s);
         }
     };
-    //private final PrintStream stdout = System.out;
+    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     public static final String MENU = "0 : Добавление заявки"
                                         + System.lineSeparator() +  "1 : Обновление заявки" + System.lineSeparator()
@@ -37,7 +38,7 @@ public class StartUITest {
 
     @After
     public void backOutput() {
-        System.setOut(System.out);
+        System.setOut(this.stdout);
         System.out.println("execute after method");
     }
 
@@ -48,9 +49,9 @@ public class StartUITest {
         Item item2 = tracker.add(new Item("name2", "desc2"));
         Item item3 = tracker.add(new Item("name3", "desc3"));
         Input input = new StubInput(new String[]{"4", "y"});
-        new StartUI(input, tracker, output).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(
-                this.output.toString(),
+                this.out.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)
@@ -77,7 +78,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"2", item2.getId(), "y"});
         new StartUI(input, tracker, output).init();
         assertThat(
-                this.output.toString(),
+                this.out.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)
@@ -97,7 +98,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker, output).init();
         assertThat(
-                this.output.toString(),
+                this.out.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)

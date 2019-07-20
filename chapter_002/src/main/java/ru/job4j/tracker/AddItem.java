@@ -1,9 +1,14 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public class AddItem extends BaseAction {
 
-    public AddItem(int key, String name) {
+    private Consumer<String> out;
+
+    public AddItem(int key, String name, Consumer<String> out) {
         super(key, name);
+        this.out = out;
     }
 
     @Override
@@ -13,6 +18,6 @@ public class AddItem extends BaseAction {
         String desc = input.ask("Введите описание заявки : ");
         Item item = new Item(name, desc);
         tracker.add(item);
-        System.out.println("-----------Новая заявка с getId : " + item.getId() + "-----------");
+        out.accept("-----------Новая заявка с getId : " + item.getId() + "-----------");
     }
 }

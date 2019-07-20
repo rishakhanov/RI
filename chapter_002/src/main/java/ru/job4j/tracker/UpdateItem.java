@@ -1,9 +1,14 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public class UpdateItem extends BaseAction {
 
-    public UpdateItem(int key, String name) {
+    private Consumer<String> out;
+
+    public UpdateItem(int key, String name, Consumer<String> out) {
         super(key, name);
+        this.out = out;
     }
 
     @Override
@@ -14,9 +19,9 @@ public class UpdateItem extends BaseAction {
         String desc = input.ask("Введите описание заявки : ");
         Item item = new Item(name, desc);
         if (tracker.replace(id, item)) {
-            System.out.println("Item was updated");
+            out.accept("Item was updated");
         } else {
-            System.out.println("Item not found");
+            out.accept("Item not found");
         }
     }
 }

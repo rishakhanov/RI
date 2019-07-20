@@ -5,9 +5,11 @@ import java.util.function.Consumer;
 
 public class ShowItems extends BaseAction {
 
+    private Consumer<String> out;
 
-    public ShowItems(int key, String name) {
+    public ShowItems(int key, String name, Consumer<String> out) {
         super(4, "Вывести все заявки");
+        this.out = out;
     }
 
     @Override
@@ -15,8 +17,7 @@ public class ShowItems extends BaseAction {
         System.out.println("----------------Вывод всех заявок------------");
         List<Item> arrays = tracker.findAll();
         for (Item item : arrays) {
-            System.out.println(item.getName() + " " + item.getDescription());
-            //output.accept(item.getName() + " " + item.getDescription());
+            out.accept(item.getName() + " " + item.getDescription());
         }
     }
 }
