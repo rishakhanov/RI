@@ -8,14 +8,15 @@ import java.io.PrintStream;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
+import static java.lang.System.out;
 import static org.hamcrest.core.Is.is;
 //import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
+    private Tracker tracker;
     private final Consumer<String> output = new Consumer<String>() {
-        private final PrintStream stdout = new PrintStream(out);
         @Override
         public void accept(String s) {
             stdout.println(s);
@@ -29,11 +30,17 @@ public class StartUITest {
                                         + System.lineSeparator() + "4 : Вывести все заявки" + System.lineSeparator()
                                         + "5 : Поиск заявки по имени" + System.lineSeparator();
 
-
     @Before
     public void loadOutput() {
+        tracker = new Tracker();
+        tracker.add(new Item("name1", "desc1"));
+        tracker.add(new Item("name2", "desc2"));
+        tracker.add(new Item("name3","desc3"));
+        tracker.add(new Item("name4", "desc4"));
+        tracker.add(new Item("name5", "desc5"));
+        tracker.add(new Item("name6", "desc6"));
         System.out.println("execute before method");
-        System.setOut(new PrintStream(this.out));
+        System.setOut(new PrintStream(out));
     }
 
     @After
@@ -63,7 +70,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("name3" + " " + "desc3")
                                 .append(System.lineSeparator())
-                                //.append(MENU)
                                 .toString()
                 )
         );
@@ -86,7 +92,6 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("Заявка с id : " + item2.getId() + " и с именем : " + item2.getName())
                                 .append(System.lineSeparator())
-                                //.append(MENU)
                                 .toString()
                 )
         );
@@ -106,14 +111,10 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("-----------Новая заявка с getId : " + tracker.findAll().get(0).getId() + "-----------")
                                 .append(System.lineSeparator())
-                                //.append(MENU)
                                 .toString()
                 )
         );
     }
-
-
-
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
@@ -130,7 +131,6 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"1", item.getId(), "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker, output).init();
         assertThat(tracker.findAll().get(0).getName(), is("test replace"));
-        //assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
 
     @Test
