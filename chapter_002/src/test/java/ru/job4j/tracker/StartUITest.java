@@ -17,13 +17,20 @@ public class StartUITest {
 
     private Tracker tracker;
     private final Consumer<String> output = new Consumer<String>() {
+        private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream stream = new PrintStream(out);
         @Override
         public void accept(String s) {
-            stdout.println(s);
+            stream.println(s);
+        }
+
+        @Override
+        public String toString() {
+            return out.toString();
         }
     };
     private final PrintStream stdout = System.out;
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
     public static final String MENU = "0 : Добавление заявки"
                                         + System.lineSeparator() +  "1 : Обновление заявки" + System.lineSeparator()
                                         + "2 : Поиск заявки" +  System.lineSeparator() + "3 : Удаление заявки"
@@ -35,7 +42,7 @@ public class StartUITest {
         tracker = new Tracker();
         tracker.add(new Item("name1", "desc1"));
         tracker.add(new Item("name2", "desc2"));
-        tracker.add(new Item("name3","desc3"));
+        tracker.add(new Item("name3", "desc3"));
         tracker.add(new Item("name4", "desc4"));
         tracker.add(new Item("name5", "desc5"));
         tracker.add(new Item("name6", "desc6"));
@@ -58,7 +65,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"4", "y"});
         new StartUI(input, tracker, this.output).init();
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)
@@ -84,7 +91,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"2", item2.getId(), "y"});
         new StartUI(input, tracker, output).init();
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)
@@ -103,7 +110,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker, output).init();
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(MENU)

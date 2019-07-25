@@ -14,7 +14,7 @@ public class ShowItems extends BaseAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("----------------Вывод всех заявок------------");
+        out.accept("----------------Вывод всех заявок------------");
         List<Item> arrays = tracker.findAll();
         for (Item item : arrays) {
             out.accept(item.getName() + " " + item.getDescription());

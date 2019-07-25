@@ -13,7 +13,7 @@ public class FindItem extends BaseAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("----------------Поиск заявки по id------------");
+        out.accept("----------------Поиск заявки по id------------");
         String id = input.ask("Введите id заявки : ");
         Item result = tracker.findById(id);
         if (result != null) {
