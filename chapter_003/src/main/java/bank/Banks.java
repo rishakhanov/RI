@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Banks {
     Map<User, List<Account>> banks = new HashMap<>();
@@ -34,23 +35,29 @@ public class Banks {
 
     public List<Account> getUserAccounts(String passport) {
         List<Account> list = new ArrayList<>();
-        for (Map.Entry<User, List<Account>> entry : banks.entrySet()) {
+        list = banks.entrySet().stream().filter(
+                entry -> entry.getKey().getPassport().equals(passport)
+        ).map(task -> banks.get(task)).findFirst().orElse(null);
+        /*for (Map.Entry<User, List<Account>> entry : banks.entrySet()) {
             if ((entry.getKey().passport).equals(passport)) {
                 list = entry.getValue();
                 break;
             }
-        }
+        }*/
         return list;
     }
 
     public Account findAccount(String passport, String requisite) {
         List<Account> list = new ArrayList<>(this.getUserAccounts(passport));
         Account result = null;
+        result = list.stream().filter(item -> requisite.equals(item.getRequisites())).findFirst().orElse(null);
+        /*
         for (Account entry : list) {
             if ((entry.requisites).equals(requisite)) {
                 result = entry;
             }
         }
+        */
         return result;
     }
 
