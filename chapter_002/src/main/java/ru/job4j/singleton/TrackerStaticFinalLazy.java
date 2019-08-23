@@ -1,6 +1,6 @@
 package ru.job4j.singleton;
 
-import javax.xml.ws.Holder;
+//import javax.xml.ws.Holder;
 
 public class TrackerStaticFinalLazy {
     private TrackerStaticFinalLazy() {
