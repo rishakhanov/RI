@@ -2,8 +2,11 @@ package sort;
 
 import org.junit.Test;
 import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
+import java.util.List;
 
 public class SortUserTest {
     @Test
@@ -21,22 +24,21 @@ public class SortUserTest {
     }
 
     @Test
-    public void whenListThenSortdedListByNameAndAge() {
+    public void whenListThenSortedListByNameAndAge() {
         SortUser sortUser = new SortUser();
-        List<User> list = new ArrayList<>();
-        User u1 = new User("Сергей", 25);
-        User u2 = new User("Иван", 30);
-        User u3 = new User("Сергей", 20);
-        User u4 = new User("Иван", 25);
-        list.add(u1);
-        list.add(u2);
-        list.add(u3);
-        list.add(u4);
-        List<User> result = new ArrayList<>();
-        result.add(u4);
-        result.add(u2);
-        result.add(u3);
-        result.add(u1);
-        assertThat(result, is(sortUser.sortByAllFields(list)));
+        List<User> list = List.of(
+                new User("Сергей", 25),
+                new User("Иван", 30),
+                new User("Сергей", 20),
+                new User("Иван", 25)
+        );
+        List<User> actual = sortUser.sortByAllFields(list);
+        List<User> expected = List.of(
+                new User("Иван", 25),
+                new User("Иван", 30),
+                new User("Сергей", 20),
+                new User("Сергей", 25)
+        );
+        assertThat(expected, is(actual));
     }
 }
