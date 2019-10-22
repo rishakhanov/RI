@@ -9,7 +9,7 @@ public class Converter {
             Iterator<Integer> iterator = it.next();
             @Override
             public boolean hasNext() {
-                if (!iterator.hasNext() && it.hasNext()) {
+                while (!iterator.hasNext() && it.hasNext()) {
                     iterator = it.next();
                 }
                 return iterator.hasNext();
