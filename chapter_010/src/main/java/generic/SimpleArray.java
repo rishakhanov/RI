@@ -17,29 +17,30 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int position) {
-        return (T) this.objects[position];
+        T result = null;
+        if (position < this.objects.length) {
+            result = (T) this.objects[position];
+        }
+        return result;
     }
 
     public void set(int indexRow, T model) {
-        this.objects[indexRow] = model;
+        if (indexRow < this.objects.length) {
+            this.objects[indexRow] = model;
+        }
     }
 
     public void remove(int indexRow) {
-        objects[indexRow] = null;
-        while (indexRow < objects.length - 1) {
-            objects[indexRow] = objects[indexRow + 1];
-            indexRow++;
-        }
+        System.arraycopy(this.objects, indexRow + 1, this.objects, indexRow, this.objects.length - indexRow - 1);
     }
 
     @Override
     public Iterator iterator() {
         return new Iterator() {
-
             @Override
             public boolean hasNext() {
                 boolean result = false;
-                if (objects[indexRowIterator] != null) {
+                if (indexRowIterator < objects.length) {
                     result = true;
                 }
                 return result;
