@@ -5,15 +5,16 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     SimpleArray<T> objects = new SimpleArray<>(10);
 
     public int getIndex(T model, SimpleArray<T> objects) {
-        int result = 0;
+        int result = -1;
+        boolean exist = false;
         while (objects.iterator().hasNext()) {
+            result++;
             if (objects.iterator().next().equals(model)) {
+                exist = true;
                 break;
-            } else {
-                result++;
             }
         }
-        return result;
+        return exist ? result : -1;
     }
 
     @Override
