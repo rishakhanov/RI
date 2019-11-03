@@ -1,15 +1,18 @@
 package generic;
 
+import java.util.Iterator;
+
 public abstract class AbstractStore<T extends Base> implements Store<T> {
 
     SimpleArray<T> objects = new SimpleArray<>(10);
 
-    public int getIndex(T model, SimpleArray<T> objects) {
+    public int getIndex(String id) {
         int result = -1;
         boolean exist = false;
-        while (objects.iterator().hasNext()) {
+        Iterator<T> iterator = objects.iterator();
+        while (iterator.hasNext()) {
             result++;
-            if (objects.iterator().next().equals(model)) {
+            if (iterator.next().getId().equals(id)) {
                 exist = true;
                 break;
             }
@@ -24,28 +27,24 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        T target = objects.get(getIndex(findById(id), objects));
-        objects.set(getIndex(findById(id), objects), model);
-        boolean result = true;
-        for (T item: objects) {
-            if (item.equals(target)) {
-                result = false;
-            }
+        boolean res = false;
+        int index = getIndex(id);
+        if(index != -1) {
+            objects.set(index, model);
+            res = true;
         }
-        return result;
+        return res;
     }
 
     @Override
     public boolean delete(String id) {
-        T target = objects.get(getIndex(findById(id), objects));
-        objects.remove(getIndex(findById(id), objects));
-        boolean result = true;
-        for (T item: objects) {
-            if (item.equals(target)) {
-                result = false;
-            }
+        boolean res = false;
+        int index = getIndex(id);
+        if(index != -1) {
+            objects.remove(index);
+            res = true;
         }
-        return result;
+        return res;
     }
 
     @Override
