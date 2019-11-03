@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] objects;
-    private int indexRowObjects = 0, indexRowIterator = 0;
+    private int indexRowObjects = 0;//, indexRowIterator = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
@@ -38,6 +38,7 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator iterator() {
         return new Iterator() {
+            int indexRowIterator;
             @Override
             public boolean hasNext() {
                 boolean result = false;
