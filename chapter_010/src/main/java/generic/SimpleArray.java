@@ -52,9 +52,8 @@ public class SimpleArray<T> implements Iterable<T> {
             public Object next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                } else {
-                    return objects[indexRowIterator++];
                 }
+                return objects[indexRowIterator++];
             }
         };
     }
