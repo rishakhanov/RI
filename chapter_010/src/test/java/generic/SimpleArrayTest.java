@@ -45,11 +45,12 @@ public class SimpleArrayTest {
 
     @Test
     public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
-        assertThat(simple.iterator().hasNext(), Matchers.is(true));
-        assertThat(simple.iterator().hasNext(), Matchers.is(true));
-        assertThat(simple.iterator().next(), Matchers.is("test"));
-        assertThat(simple.iterator().next(), Matchers.is("test2"));
-        assertThat(simple.iterator().next(), Matchers.is("test3"));
-        assertThat(simple.iterator().next(), Matchers.is("test4"));
+        Iterator iterator = simple.iterator();
+        assertThat(iterator.hasNext(), Matchers.is(true));
+        assertThat(iterator.hasNext(), Matchers.is(true));
+        assertThat(iterator.next(), Matchers.is("test"));
+        assertThat(iterator.next(), Matchers.is("test2"));
+        assertThat(iterator.next(), Matchers.is("test3"));
+        assertThat(iterator.next(), Matchers.is("test4"));
     }
 }

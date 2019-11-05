@@ -29,7 +29,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     public boolean replace(String id, T model) {
         boolean res = false;
         int index = getIndex(id);
-        if(index != -1) {
+        if (index != -1) {
             objects.set(index, model);
             res = true;
         }
@@ -40,7 +40,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     public boolean delete(String id) {
         boolean res = false;
         int index = getIndex(id);
-        if(index != -1) {
+        if (index != -1) {
             objects.remove(index);
             res = true;
         }
