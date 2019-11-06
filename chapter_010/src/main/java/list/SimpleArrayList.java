@@ -17,14 +17,12 @@ public class SimpleArrayList<E> {
 
     public E delete() {
         Node<E> deletedItem;
-        Node<E> result = this.first;
-        for (int i = 0; i < this.getSize() - 1; i++) {
-            result  = result.next;
+        deletedItem = this.first;
+        deletedItem.data = this.first.data;
+        if (this.size >= 1) {
+            this.first = null;
+            this.size--;
         }
-        deletedItem = result;
-        deletedItem.data = result.data;
-        result = null;
-        this.size--;
         return deletedItem.data;
     }
 
