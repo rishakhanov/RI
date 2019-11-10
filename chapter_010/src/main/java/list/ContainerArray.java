@@ -10,7 +10,7 @@ public class ContainerArray<E> implements Iterable<E> {
     private Object[] container;
     private int modcount = 0;
     private int indexRowObjects = 0;
-    int size;
+    private int size;
 
     public ContainerArray(int size) {
         this.container = new Object[size];
@@ -36,8 +36,8 @@ public class ContainerArray<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int indexRowIterator;
-            int expectedModCount = modcount;
+            private int indexRowIterator;
+            private int expectedModCount = modcount;
             @Override
             public boolean hasNext() {
                 boolean result = false;
