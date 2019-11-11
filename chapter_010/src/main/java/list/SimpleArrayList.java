@@ -3,6 +3,8 @@ package list;
 
 import javafx.scene.Node;
 
+import java.util.NoSuchElementException;
+
 public class SimpleArrayList<E> {
 
     private int size;
@@ -17,12 +19,13 @@ public class SimpleArrayList<E> {
 
     public E delete() {
         Node<E> deletedItem;
+        if (this.size < 1) {
+            throw new NoSuchElementException();
+        }
         deletedItem = this.first;
         deletedItem.data = this.first.data;
-        if (this.size >= 1) {
-            this.first = null;
-            this.size--;
-        }
+        this.first = null;
+        this.size--;
         return deletedItem.data;
     }
 
