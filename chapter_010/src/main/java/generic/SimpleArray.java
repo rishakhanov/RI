@@ -1,5 +1,6 @@
 package generic;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -7,13 +8,18 @@ public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] objects;
     private int indexRowObjects = 0;
+    private int modcount = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
     }
 
     public void add(T value) {
+        if (indexRowObjects == objects.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         this.objects[indexRowObjects++] = value;
+        modcount++;
     }
 
     public T get(int position) {
@@ -38,10 +44,14 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            int indexRowIterator;
+            private int indexRowIterator;
+            private int expectedModCount = modcount;
             @Override
             public boolean hasNext() {
                 boolean result = false;
+                if (expectedModCount != modcount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (indexRowIterator < indexRowObjects) {
                     result = true;
                 }
