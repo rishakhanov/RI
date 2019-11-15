@@ -1,5 +1,6 @@
 package list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -8,6 +9,7 @@ public class ContainerList<E> implements Iterable<E> {
     private int size;
     private Node<E> head;
     private Node<E> tail;
+    private int modCount = 0;
 
     public void add(E data) {
         Node<E> newLink = new Node<>(data);
@@ -20,6 +22,7 @@ public class ContainerList<E> implements Iterable<E> {
         if (size == 1) {
             tail = this.head;
         }
+        modCount++;
     }
 
     public E get(int index) {
@@ -43,6 +46,7 @@ public class ContainerList<E> implements Iterable<E> {
         deletedItem.data = this.head.data;
         this.head = null;
         this.size--;
+        modCount++;
         return deletedItem.data;
     }
 
@@ -59,10 +63,15 @@ public class ContainerList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
+            Node<E> nodeIterator = head;
             int indexRowIterator;
+            int expectedModCount = modCount;
             @Override
             public boolean hasNext() {
                 boolean result = false;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (indexRowIterator < size) {
                     result = true;
                 }
@@ -74,7 +83,9 @@ public class ContainerList<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(indexRowIterator++);
+                E result = nodeIterator.data;
+                nodeIterator = nodeIterator.next;
+                return result;
             }
         };
     }
