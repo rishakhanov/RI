@@ -1,13 +1,13 @@
 package list;
 
 public class SimpleStack<T> {
-    private ContainerList<T> containerList = new ContainerList<T>();
+    private ContainerList<T> list = new ContainerList<T>();
     public void push(T value) {
-        containerList.add(value);
+        list.add(value);
     }
 
     public T poll() {
-        return containerList.deleteHead();
+        return list.deleteHead();
     }
 
 }
