@@ -38,13 +38,15 @@ public class ContainerList<E> implements Iterable<E> {
     }
 
     public E deleteHead() {
-        Node<E> deletedItem;
+        Node<E> deletedItem, previousItem;
         if (this.size < 1) {
             throw new NoSuchElementException();
         }
         deletedItem = this.head;
         deletedItem.data = this.head.data;
+        previousItem = this.head.next;
         this.head = null;
+        this.head = previousItem;
         this.size--;
         modCount++;
         return deletedItem.data;

@@ -7,7 +7,7 @@ public class SimpleStack<T> {
     }
 
     public T poll() {
-        containerList.deleteHead();
+        return containerList.deleteHead();
     }
 
 }
