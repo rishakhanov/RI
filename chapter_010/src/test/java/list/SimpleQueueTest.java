@@ -29,4 +29,14 @@ public class SimpleQueueTest {
         simpleQueue.poll();
         assertThat(simpleQueue.poll(), is(3));
     }
+
+    @Test
+    public void whenPush1Push2PollPush3PollThen2() {
+        simpleQueue = new SimpleQueue<>();
+        simpleQueue.push(1);
+        simpleQueue.push(2);
+        simpleQueue.poll();
+        simpleQueue.push(3);
+        assertThat(simpleQueue.poll(), is(2));
+    }
 }

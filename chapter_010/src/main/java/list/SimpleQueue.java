@@ -11,12 +11,15 @@ public class SimpleQueue<T> {
     }
 
     public T poll() {
-        if (count != 0) {
-            for (int i = 0; i < count; i++) {
-                finQueue.push(initQueue.poll());
-            }
+        T item = null;
+        for (int i = 0; i < count; i++) {
+            finQueue.push(initQueue.poll());
         }
-        count = 0;
-        return finQueue.poll();
+        item = finQueue.poll();
+        count--;
+        for (int i = 0; i < count; i++) {
+            initQueue.push(finQueue.poll());
+        }
+        return item;
     }
 }
