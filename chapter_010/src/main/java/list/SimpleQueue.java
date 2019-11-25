@@ -11,6 +11,7 @@ public class SimpleQueue<T> {
     }
 
     public T poll() {
+        /*
         T item = null;
         for (int i = 0; i < count; i++) {
             finQueue.push(initQueue.poll());
@@ -20,6 +21,23 @@ public class SimpleQueue<T> {
         for (int i = 0; i < count; i++) {
             initQueue.push(finQueue.poll());
         }
+        return item;
+        */
+        T item = null;
+        int i = 0;
+        while (i <= (count * 2) - 1) {
+            if (i < count) {
+                finQueue.push(initQueue.poll());
+            }
+            if (i == count) {
+                item = finQueue.poll();
+            }
+            if (i > count) {
+                initQueue.push(finQueue.poll());
+            }
+            i++;
+        }
+        count--;
         return item;
     }
 }
