@@ -13,6 +13,14 @@ public class SimpleSet<E> implements Iterable<E> {
     private int indexRowObjects = 0;
 
     public void add(E value) {
+        if (contains(value)) {
+            containerArray.add(value);
+            modcount++;
+            indexRowObjects++;
+        }
+    }
+
+    public boolean contains(E value) {
         boolean check = true;
         for (E item: containerArray) {
             if (item.equals(value)) {
@@ -20,37 +28,11 @@ public class SimpleSet<E> implements Iterable<E> {
                 break;
             }
         }
-        if (check) {
-            containerArray.add(value);
-            modcount++;
-            indexRowObjects++;
-        }
+        return  check;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int indexRowIterator;
-            private int expectedModCount = modcount;
-            @Override
-            public boolean hasNext() {
-                boolean result = false;
-                if (expectedModCount != modcount) {
-                    throw new ConcurrentModificationException();
-                }
-                if (indexRowIterator < indexRowObjects) {
-                    result = true;
-                }
-                return result;
-            }
-
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return (E) containerArray.get(indexRowIterator++);
-            }
-        };
+        return containerArray.iterator();
     }
 }
