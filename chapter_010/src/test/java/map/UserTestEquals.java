@@ -1,3 +1,4 @@
+/*
 package map;
 
 import org.junit.Test;
@@ -41,3 +42,4 @@ public class UserTestEquals {
         System.out.println(map);
     }
 }
+*/
