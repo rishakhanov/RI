@@ -2,21 +2,15 @@ package set;
 
 import list.ContainerArray;
 
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class SimpleSet<E> implements Iterable<E> {
 
     private ContainerArray<E> containerArray = new ContainerArray<>(10);
-    private int modcount = 0;
-    private int indexRowObjects = 0;
 
     public void add(E value) {
         if (contains(value)) {
             containerArray.add(value);
-            modcount++;
-            indexRowObjects++;
         }
     }
 
