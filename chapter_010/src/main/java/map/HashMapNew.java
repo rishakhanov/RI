@@ -1,8 +1,15 @@
 package map;
 
-public class HashMapNew<K, V> {
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class HashMapNew<K, V> implements Iterable<V> {
     private int size;
     private Node[] table;
+    private int countItems = 0;
+    private double loadfactor = 0.75;
+    private int modCount = 0;
 
     public HashMapNew(int size) {
         this.size = size;
@@ -51,24 +58,41 @@ public class HashMapNew<K, V> {
     public V get(K k) {
         int index = indexFor(hash(k), size);
         Node node = table[index];
-        while (node != null) {
-            if ((node.hash == hash(k)) && (node.key == k || node.key.equals(k))) {
-                return (V) node.value;
-            }
+        if (node.key == k || node.key.equals(k)) {
+            return (V) node.getValue();
         }
         return null;
     }
 
     public boolean insert(K k, V v) {
+        if ((countItems / size) >= loadfactor) {
+            resize();
+        }
+
+        boolean check = false;
         int index = indexFor(hash(k), size);
         Node node = table[index];
         if (node != null) {
-            return false;
+            if (node.key == k || node.key.equals(k)) {
+                node.value = v;
+            }
         } else {
             Node newNode = new Node(k, v);
             table[index] = newNode;
-            return true;
+            countItems++;
+            modCount++;
+            check = true;
         }
+        return check;
+    }
+
+    public void resize() {
+        size = size * 2;
+        Node[] tableNew = new Node[size];
+        for (Node node: table) {
+            tableNew[indexFor(hash(node.getKey()), size)] = node;
+        }
+        table = tableNew;
     }
 
     public boolean delete(K k) {
@@ -76,8 +100,42 @@ public class HashMapNew<K, V> {
         int index = indexFor(hash(k), size);
         if (index <= size) {
             table[index] = null;
+            countItems--;
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public Iterator<V> iterator() {
+        return new Iterator<V>() {
+            private int indexRowIterator = 0;
+            private int expectedModCount = modCount;
+            @Override
+            public boolean hasNext() {
+                boolean result = false;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                for (int i = indexRowIterator; i < size; i++) {
+                    if (table[i] != null) {
+                        indexRowIterator = i;
+                        break;
+                    }
+                }
+                if (indexRowIterator < countItems) {
+                    result = true;
+                }
+                return result;
+            }
+
+            @Override
+            public V next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return (V) table[indexRowIterator++].getValue();
+            }
+        };
     }
 }
