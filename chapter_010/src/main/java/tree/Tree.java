@@ -12,17 +12,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        boolean result = false;
         Optional<Node<E>> parentNode = findBy(parent);
+        if (parentNode.isEmpty()) {
+            return false;
+        }
+
         for (Node<E> currentChild : parentNode.get().leaves()) {
             if (currentChild.eqValue(child)) {
                 return false;
             }
         }
         parentNode.get().add(new Node<E>(child));
-        result = true;
         modCount++;
-        return result;
+        return true;
     }
 
     @Override
