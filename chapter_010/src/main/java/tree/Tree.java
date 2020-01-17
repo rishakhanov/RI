@@ -17,11 +17,13 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             return false;
         }
 
-        for (Node<E> currentChild : parentNode.get().leaves()) {
-            if (currentChild.eqValue(child)) {
+        Optional<Node<E>> currentChild = findBy(child);
+        if (currentChild.isPresent()) {
+            if (currentChild.get().eqValue(child)) {
                 return false;
             }
         }
+
         parentNode.get().add(new Node<E>(child));
         modCount++;
         return true;
@@ -78,7 +80,4 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
         };
     }
-
-
-
 }
