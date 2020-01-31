@@ -68,7 +68,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
 
             @Override
-            public E next() {
+            public Node<E> next() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
@@ -76,8 +76,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                     throw new NoSuchElementException();
                 }
                 addToQueue(elements.peek());
-                return elements.poll().getValue();
+                return elements.poll();
             }
         };
+    }
+
+    public boolean isBinary() {
+        boolean result = true;
+        Iterator iterator = this.iterator();
+        Node<E> element = new Node<>(root.getValue());
+        while (iterator.hasNext()) {
+            element = (Node<E>) iterator.next();
+            if (element.leaves().size() > 2) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }
