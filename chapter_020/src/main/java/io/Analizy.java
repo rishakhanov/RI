@@ -1,55 +1,40 @@
 package io;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.io.*;
+import java.util.*;
 
 public class Analizy {
     private final Map<String, String> values = new HashMap<String, String>();
-    private int i = 0;
 
     public void run(String source, String target) {
 
-        StringJoiner out = new StringJoiner(System.lineSeparator());
-        try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            read.lines().forEach(out::add);
+        String line;
+        String prev = "1";
+        String[] res;
+        String x = null, y = null;
 
+        try (BufferedReader read = new BufferedReader(new FileReader(source))) {
+            while ((line = read.readLine()) != null) {
+                res = line.split(" ");
+                if ( ((Integer.parseInt(res[0]) == 400) || (Integer.parseInt(res[0]) == 500))
+                        & (Integer.parseInt(prev) == 200 || Integer.parseInt(prev) == 300) ) {
+                    x = res[1];
+                }
+
+                if ( ((Integer.parseInt(res[0]) == 200) || (Integer.parseInt(res[0]) == 300))
+                        & (Integer.parseInt(prev) == 400 || Integer.parseInt(prev) == 500) ) {
+                    y = res[1];
+                }
+
+                if (x != null && y != null) {
+                    values.put(x,y);
+                    x = null;
+                    y = null;
+                }
+                prev = res[0];
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        String[] lines = out.toString().split(System.lineSeparator());
-        i = lines.length;
-
-        String[] res;
-        String[][] draft = new String[i][2];
-        int j = 0;
-
-        for (String line: lines) {
-            res = line.toString().split(" ");
-            draft[j][0] = res[0];
-            draft[j][1] = res[1];
-            j++;
-        }
-
-        String x="", y="";
-
-        for (int k = 0; k < i;k++) {
-            if ((Integer.parseInt(draft[k][0]) == 400) || (Integer.parseInt(draft[k][0]) == 500)) {
-                x = draft[k][1];
-                for (int m = k+1; m < i; m++) {
-                    if ((Integer.parseInt(draft[m][0]) == 200) || (Integer.parseInt(draft[m][0]) == 300)) {
-                        y = draft[m][1];
-                        k=m;
-                        break;
-                    }
-                }
-                values.put(x, y);
-            }
         }
 
         try (PrintWriter ouT = new PrintWriter(new FileOutputStream(target))) {
