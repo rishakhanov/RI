@@ -10,28 +10,32 @@ public class Analizy {
 
         String line;
         String prev = "1";
-        String[] res;
-        String x = null, y = null;
+        char[] res1 = new char[8];
+        char[] res2 = new char[8];
+        char[] p = new char[3];
+        boolean x = false, y = false;
 
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
             while ((line = read.readLine()) != null) {
-                res = line.split(" ");
-                if ( ((Integer.parseInt(res[0]) == 400) || (Integer.parseInt(res[0]) == 500))
-                        & (Integer.parseInt(prev) == 200 || Integer.parseInt(prev) == 300) ) {
-                    x = res[1];
+                if ((line.contains("500") || line.contains("400"))
+                    & (prev.contains("200") || prev.contains("300"))) {
+                    line.getChars(4,12,res1,0);
+                    x = true;
                 }
 
-                if ( ((Integer.parseInt(res[0]) == 200) || (Integer.parseInt(res[0]) == 300))
-                        & (Integer.parseInt(prev) == 400 || Integer.parseInt(prev) == 500) ) {
-                    y = res[1];
+                if ((line.contains("200") || line.contains("300"))
+                        & (prev.contains("400") || prev.contains("500"))) {
+                    line.getChars(4,12,res2,0);
+                    y = true;
                 }
 
-                if (x != null && y != null) {
-                    values.put(x,y);
-                    x = null;
-                    y = null;
+                if (x&y) {
+                    values.put(String.valueOf(res1), String.valueOf(res2));
+                    x = false;
+                    y = false;
                 }
-                prev = res[0];
+                line.getChars(0,3,p,0);
+                prev = String.valueOf(p);
             }
         } catch (Exception e) {
             e.printStackTrace();
